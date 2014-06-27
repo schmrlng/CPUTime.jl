@@ -16,5 +16,5 @@ function time_difference()
     return toq() - CPUtoq()
 end
 
-# write your own tests here
+time_difference()
 @test 1.0 <= time_difference() <= 1.01
