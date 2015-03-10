@@ -6,7 +6,7 @@ A Julia package for measuring elapsed CPU time in Julia.
 
 ## Installation
 
-You should only use this package if you know what you're doing - CPU time on multi-core processors is a tricky beast. Please at least read the discussion in [Issue #1](https://github.com/schmrlng/CPUTime.jl/issues/1) before proceeding. Once you've done that, to install call
+You should only use this package if you know what you're doing - CPU time on multi-core processors is a tricky beast. Please at least read the discussion in [Issue #1](https://github.com/schmrlng/CPUTime.jl/issues/1) before proceeding. Once you've done that, to install call:
 ```
 Pkg.add("CPUTime")
 ```
