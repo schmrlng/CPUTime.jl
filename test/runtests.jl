@@ -17,4 +17,4 @@ function time_difference()
 end
 
 time_diff = time_difference()
-eval(parse("@test 1.0 <= $time_diff <= 1.05"))
+eval(parse("@test abs($time_diff - 1.0) <= .01"))
