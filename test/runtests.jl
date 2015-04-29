@@ -16,5 +16,5 @@ function time_difference()
     return toq() - CPUtoq()
 end
 
-time_difference()
-@test 1.0 <= time_difference() <= 1.01
+time_diff = time_difference()
+eval(parse("@test 1.0 <= $time_diff <= 1.05"))
