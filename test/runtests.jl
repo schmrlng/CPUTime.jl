@@ -16,5 +16,6 @@ function time_difference()
     return toq() - CPUtoq()
 end
 
+time_difference()  # compilation overhead should not affect results, but just in case
 time_diff = time_difference()
 eval(parse("@test abs($time_diff - 1.0) <= .01"))
