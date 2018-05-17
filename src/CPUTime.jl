@@ -31,7 +31,7 @@ end
 function CPUtoq()
     t1 = CPUtime_us()
     timers = get(task_local_storage(), :CPUTIMERS, ())
-    if is(timers,())
+    if timers === ()
         error("CPUtoc() without CPUtic()")
     end
     @compat t0 = timers[1]::UInt64
