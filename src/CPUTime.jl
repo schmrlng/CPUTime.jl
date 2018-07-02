@@ -12,7 +12,7 @@ export
 
 function CPUtime_us()
     @compat rusage = Libc.malloc(4*sizeof(Clong) + 14*sizeof(UInt64))  # sizeof(uv_rusage_t); this is different from sizeof(rusage)
-    ccall(:uv_getrusage, Cint, (Ptr{Void},), rusage)
+    ccall(:uv_getrusage, Cint, (Ptr{Nothing},), rusage)
     @compat utime = UInt64(1000000)*unsafe_load(convert(Ptr{Clong}, rusage + 0*sizeof(Clong))) +    # user CPU time
                                     unsafe_load(convert(Ptr{Clong}, rusage + 1*sizeof(Clong)))
     @compat stime = UInt64(1000000)*unsafe_load(convert(Ptr{Clong}, rusage + 2*sizeof(Clong))) +    # system CPU time
