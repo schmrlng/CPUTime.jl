@@ -1,5 +1,5 @@
 using CPUTime
-using Base.Test
+using Compat.Test
 
 function add_and_sleep()
     x = 0
@@ -10,12 +10,12 @@ function add_and_sleep()
 end
 
 function time_difference()
-    tic()
-    CPUtic()
-    add_and_sleep()
-    return toq() - CPUtoq()
+    dt = @elapsed begin
+        CPUdt = @CPUelapsed add_and_sleep()
+    end
+    return dt - CPUdt
 end
 
 time_difference()  # compilation overhead should not affect results, but just in case
 time_diff = time_difference()
-eval(parse("@test abs($time_diff - 1.0) <= .01"))
+eval(Meta.parse("@test abs($time_diff - 1.0) <= .01"))
