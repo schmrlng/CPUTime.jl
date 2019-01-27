@@ -34,15 +34,17 @@ using CPUTime
 
 function add_and_sleep()
     x = 0
-    for i in 1:1e7
+    for i in 1:10_000_000
         x += i
     end
     sleep(1)
+    x
 end
 
 @time @CPUtime add_and_sleep()
 ````
 ````
-elapsed CPU time: 0.578552 seconds
-elapsed time: 1.580263121 seconds (320166488 bytes allocated, 11.91% gc time)
+elapsed CPU time: 0.000174 seconds
+  1.005624 seconds (32 allocations: 1.109 KiB)
+50000005000000
 ````
