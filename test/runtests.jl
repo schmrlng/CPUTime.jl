@@ -1,9 +1,9 @@
 using CPUTime
-using Compat.Test
+using Test
 
 function add_and_sleep()
     x = 0
-    for i in 1:1e7
+    for i in 1:10_000_000
         x += i
     end
     sleep(1)
@@ -18,4 +18,4 @@ end
 
 time_difference()  # compilation overhead should not affect results, but just in case
 time_diff = time_difference()
-eval(Meta.parse("@test abs($time_diff - 1.0) <= .01"))
+eval(Meta.parse("@test abs($time_diff - 1.0) <= .1"))

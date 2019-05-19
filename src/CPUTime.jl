@@ -1,7 +1,5 @@
 module CPUTime
 
-using Compat
-
 export
     CPUtime_us,
     CPUtic,
@@ -11,14 +9,14 @@ export
     @CPUelapsed
 
 function CPUtime_us()
-    @compat rusage = Libc.malloc(4*sizeof(Clong) + 14*sizeof(UInt64))  # sizeof(uv_rusage_t); this is different from sizeof(rusage)
+    rusage = Libc.malloc(4*sizeof(Clong) + 14*sizeof(UInt64))  # sizeof(uv_rusage_t); this is different from sizeof(rusage)
     ccall(:uv_getrusage, Cint, (Ptr{Nothing},), rusage)
-    @compat utime = UInt64(1000000)*unsafe_load(convert(Ptr{Clong}, rusage + 0*sizeof(Clong))) +    # user CPU time
-                                    unsafe_load(convert(Ptr{Clong}, rusage + 1*sizeof(Clong)))
-    @compat stime = UInt64(1000000)*unsafe_load(convert(Ptr{Clong}, rusage + 2*sizeof(Clong))) +    # system CPU time
-                                    unsafe_load(convert(Ptr{Clong}, rusage + 3*sizeof(Clong)))
+    utime = UInt64(1000000)*unsafe_load(convert(Ptr{Clong}, rusage + 0*sizeof(Clong))) +    # user CPU time
+                            unsafe_load(convert(Ptr{Clong}, rusage + 1*sizeof(Clong)))
+    stime = UInt64(1000000)*unsafe_load(convert(Ptr{Clong}, rusage + 2*sizeof(Clong))) +    # system CPU time
+                            unsafe_load(convert(Ptr{Clong}, rusage + 3*sizeof(Clong)))
     ttime = utime + stime  # total CPU time
-    @compat Libc.free(rusage)
+    Libc.free(rusage)
     return ttime
 end
 
@@ -34,7 +32,7 @@ function CPUtoq()
     if timers === ()
         error("CPUtoc() without CPUtic()")
     end
-    @compat t0 = timers[1]::UInt64
+    t0 = timers[1]::UInt64
     task_local_storage(:CPUTIMERS, timers[2])
     (t1-t0)/1e6
 end

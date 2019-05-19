@@ -1,0 +1,13 @@
+name = "CPUTime"
+uuid = "a9c8d775-2e2e-55fc-8582-045d282d599e"
+authors = ["Ed Schmerling <ednerd@gmail.com>"]
+version = "1.0.0"
+
+[compat]
+julia = "≥ 0.7.0"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
